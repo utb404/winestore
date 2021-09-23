@@ -1,8 +1,12 @@
-import datetime
 import collections
-from http.server import HTTPServer, SimpleHTTPRequestHandler
-from jinja2 import Environment, FileSystemLoader, select_autoescape
+import datetime
 import pandas
+
+from http.server import HTTPServer
+from http.server import SimpleHTTPRequestHandler
+from jinja2 import Environment
+from jinja2 import FileSystemLoader
+from jinja2 import select_autoescape
 
 
 def open_template(template):
@@ -23,11 +27,6 @@ def get_wines(excel_file):
     return wines
 
 
-def get_year(start_year):
-    year = datetime.datetime.now().year - start_year
-    return year
-
-
 def render_page(template, year, wines):
     rendered_page = template.render(year=year, wines=sorted(wines.items()))
     with open('index.html', 'w', encoding="utf8") as file:
@@ -40,7 +39,7 @@ def start_server():
 
 
 if __name__ == '__main__':
+    year = datetime.datetime.now().year - 1920
     render_page(open_template('template.html'),
-                get_year(1920),
-                get_wines('wine3.xlsx'))
+                year, get_wines('wine3.xlsx'))
     start_server()
