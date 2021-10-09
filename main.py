@@ -1,3 +1,4 @@
+import argparse
 import collections
 import datetime
 import pandas
@@ -28,7 +29,7 @@ def get_wines(excel_file):
 
 
 def render_page(template, year, wines):
-    rendered_page = template.render(year=year, wines=sorted(wines.items()))
+    rendered_page = template.render(year=year, all_wines=sorted(wines.items()))
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
 
@@ -39,7 +40,10 @@ def start_server():
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--file_path', default='wine3.xlsx', help='Путь к файлу с перечнем напитков' )
+    file_path = parser.parse_args().file_path
     year = datetime.datetime.now().year - 1920
     render_page(open_template('template.html'),
-                year, get_wines('wine3.xlsx'))
+                year, get_wines(file_path))
     start_server()
