@@ -41,7 +41,7 @@ def start_server():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--file_path', default='wine3.xlsx', help='Путь к файлу с перечнем напитков' )
+    parser.add_argument('-f', '--file_path', default='template.xlsx', help='Путь к файлу с перечнем напитков' )
     file_path = parser.parse_args().file_path
     year = datetime.datetime.now().year - 1920
     render_page(open_template('template.html'),
