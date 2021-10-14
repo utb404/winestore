@@ -19,13 +19,13 @@ def open_template(template):
     return template
 
 
-def get_wines(excel_file):
-    excel_wines = pandas.read_excel(excel_file, sheet_name='Лист1',
-                                    na_values='None', keep_default_na=False)
-    wines = collections.defaultdict(list)
-    for wine in excel_wines.to_dict(orient='records'):
-        wines[wine['Категория']].append(wine)
-    return wines
+def get_wines(file_path):
+    wines = pandas.read_excel(file_path, sheet_name='Лист1',
+                                    na_values='None', keep_default_na=False).to_dict()
+    grouped_wines = collections.defaultdict(list)
+    for wine in wines.to_dict(orient='records'):
+        grouped_wines[wine['Категория']].append(wine)
+    return grouped_wines
 
 
 def render_page(template, year, wines):
