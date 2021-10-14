@@ -9,6 +9,8 @@ from jinja2 import Environment
 from jinja2 import FileSystemLoader
 from jinja2 import select_autoescape
 
+YEAR_OF_FOUNDATION = 1920
+
 
 def open_template(template):
     env = Environment(
@@ -43,7 +45,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--file_path', default='template.xlsx', help='Путь к файлу с перечнем напитков' )
     file_path = parser.parse_args().file_path
-    year = datetime.datetime.now().year - 1920
+    winestore_age = datetime.datetime.now().year - YEAR_OF_FOUNDATION
     render_page(open_template('template.html'),
                 year, get_wines(file_path))
     start_server()
