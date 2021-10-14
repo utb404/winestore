@@ -47,5 +47,5 @@ if __name__ == '__main__':
     file_path = parser.parse_args().file_path
     winestore_age = datetime.datetime.now().year - YEAR_OF_FOUNDATION
     render_page(open_template('template.html'),
-                year, get_wines(file_path))
+                winestore_age, get_wines(file_path))
     start_server()
